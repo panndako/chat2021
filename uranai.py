@@ -11,14 +11,14 @@ def chat(text, **kw):  #チャット用の関数（ここを書き換える）
   return 'ほ' * n
 
 # アイコンの指定
-BOT_ICON = 'https://2.bp.blogspot.com/-mRJKwyORJkQ/Wn1ZTOBrszI/AAAAAAABKKs/Bg5yjLL9RYwmfUM0pEkBA3Ky3ui0IOZWQCLcBGAs/s800/animal_smile_inu.png'
+BOT_ICON = 'https://1.bp.blogspot.com/-_tnyZ46sJ_M/X1LsmD2uZOI/AAAAAAABa_w/FjmL4ow5bQY91MTkM63t5h_ADylNvTfrgCNcBGAsYHQ/s1600/yumekawa_angel_tenshi.png'
 YOUR_ICON = 'https://4.bp.blogspot.com/-SC6_6x7MQnc/Wn1ZUkdcPxI/AAAAAAABKK8/qqHVlc8E7lEGsEwJ_J8H6Gp9RvfhTX67wCLcBGAs/s800/animal_smile_neko.png'
 
-def run_chat(chat = chat, start='占いするよ', **kw):
+def run_chat(chat = chat, start='話しかけてね', **kw):
 
   def display_bot(bot_text):
     with output.redirect_to_element('#output'):
-      bot_name = kw.get('bot_name', 'ボット')
+      bot_name = kw.get('bot_name', '話ちゃん')
       bot_icon = kw.get('bot_icon', BOT_ICON)
       display(IPython.display.HTML(f'''
       <div class="sb-box">
@@ -246,19 +246,35 @@ def myuranai(input_text):
     del frame['asking']
 
   if 'name' not in frame:
-    frame['asking'] = 'name' # 名前をたずねる  
-    return 'あなたの名前は？'
+    frame['asking'] = 'name' # 気分を１０段階で表させる  
+    return 'あなたの気分を10段階で表すと？'
 
   if 'name' in frame and 'birthday' not in frame:
-    frame['asking'] = 'birthday' # 誕生日をたずねる    
-    return 'あなたの誕生日は？'
+    frame['asking'] = 'birthday' # ご飯のメニューを聞く
+    return 'ご飯のメニューは？'
 
   if 'name' in frame and 'birthday' in frame:
     # 占います
     number = hash(frame['name']+frame['birthday']) % 10
-    if number > 5:
-      return 'あなたの運勢は大吉'
-    return 'あなたの運勢は吉'
+    if number ==1:
+      return'メニューを変えてみると新しい出会いがあるかも'
+    elif number==2:
+      return'よく頑張ってるね！お散歩をしてみると運気アップ'
+    elif number==3:
+      return'新しい場所に足を運んでみると健康運アップ'
+    elif number==4:
+      return'今日は早く寝ると、仕事で成功しそう'
+    elif number==5:
+      return'よく頑張ってるね！'
+    elif number==6:
+      return'挨拶を自分からすると思わぬ出会いが。'
+    elif number==7:
+      return'頑張りすぎには注意しよう'
+    elif number==8:
+      return'自分を認めてあげて'
+    elif number==9:
+      return'よく頑張ってるね！'
+    return'良い感じ！神様は見方だよ'
 
   return output_text
 
